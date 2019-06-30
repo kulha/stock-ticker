@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import StockLoggerApp from './StockLoggerApp';
+import StockLoggerApp from './Components/StockLoggerApp';
 export default class App extends Component {
     render(){
         return (

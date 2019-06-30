@@ -16,6 +16,17 @@ export default class LogSummary extends Component {
         };
         this.tableRows = this.tableRows.bind(this);
         this.fetchData = this.fetchData.bind(this);
+        this.paddedValues=this.paddedValues.bind(this);
+    }
+    paddedValues(stockData){
+        return {
+            stockName:stockData.stockName,
+            starting:stockData.starting.toFixed(2),
+            lowest:stockData.lowest.toFixed(2),
+            highest:stockData.highest.toFixed(2),
+            current:stockData.current.toFixed(2)
+        };
+
     }
     fetchData() {
         axios.get(this.props.stockUrl)
@@ -83,20 +94,21 @@ export default class LogSummary extends Component {
         }
         summaryData = Array.from(this.state.summaryData, ([key, value]) => value);
         return summaryData.map(stockData => {
+            stockData = this.paddedValues(stockData);
             return (<tr key={stockData.stockName}>
-                        <td>
+                        <td className='pl-5 text-left'>
                             {stockData.stockName}
                         </td>
-                        <td>
+                        <td className='pr-5'>
                             {stockData.starting}
                         </td>
-                        <td>
+                        <td className='pr-5'>
                             {stockData.lowest}
                         </td>
-                        <td>
+                        <td className='pr-5'>
                             {stockData.highest}
                         </td>
-                        <td>
+                        <td className='pr-5'>
                             {stockData.current}
                         </td>
                     </tr>);
@@ -104,17 +116,18 @@ export default class LogSummary extends Component {
     }
     render() {
         return (
-            <Table borderless >
+            <Table borderless  className='text-right pr-5'>
                 <thead>
                     <tr>
-                        <th>Stock</th>
-                        <th>Starting</th>
-                        <th>Lowest</th>
-                        <th>Highest</th>
-                        <th>Current</th>
+                        <th className='px-5 text-left'>Stock</th>
+                        <th className='px-5'>Starting</th>
+                        <th className='px-5'>Lowest</th>
+                        <th className='px-5'>Highest</th>
+                        <th className='px-5'>Current</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {this.state.summaryData.length===0 && <tr><td>Loading...</td></tr>}
                     {this.tableRows()}
                 </tbody>
             </Table>

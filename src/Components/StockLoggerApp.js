@@ -66,9 +66,10 @@ export default class StockLoggerApp extends Component {
                             <Col md={4} className='pt-2 pb-1 pr-3 d-flex justify-content-end '>
                                 <LoggerControl onPaused={this.pauseHandler} onResumed={this.resumeHandler} />
                             </Col>
-                            <Col md={12}>
+                            <Col md={12} className='d-inline-flex justify-content-around'>
                                 <div className='log table'>
-                                    <LoggerDisplay logData={this.state.logData} />
+                                    {this.state.logData.length===0 && 'Loading...'}
+                                    {this.state.logData.length>0 && <LoggerDisplay logData={this.state.logData} />}
                                 </div>
                             </Col>
                         </Row>

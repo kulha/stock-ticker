@@ -1,0 +1,12 @@
+table {
+    border: 1px solid black;
+    height: 80vh !important;
+}
+.right {
+    text-align: left;
+}
+.left {
+    float:left;
+    text-align: right;
+    width:10em;
+}
